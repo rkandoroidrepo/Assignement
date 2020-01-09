@@ -10,7 +10,7 @@ import com.example.sampleapplication.utils.ErrorCode;
  */
 public interface ListContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
         /**
          * Initialise ui component
          */
@@ -18,12 +18,13 @@ public interface ListContract {
 
         /**
          * Show error message based on error code
+         *
          * @param errorCode error code defined in ErrorCode class
          */
         void showError(ErrorCode errorCode);
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
 
     }
 }

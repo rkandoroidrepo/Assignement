@@ -9,12 +9,14 @@ import com.example.sampleapplication.modal.RowData;
 public interface DataCallbackListener {
     /**
      * called when the request completed successfully
+     *
      * @param rowData
      */
     void onSuccess(RowData rowData);
 
     /**
      * Called when request failed due to any error
+     *
      * @param errorCode
      */
     void onError(int errorCode);

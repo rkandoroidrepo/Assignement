@@ -36,7 +36,7 @@ public class Row {
         this.description = description;
     }
 
-    public Object getImageHref() {
+    public String getImageHref() {
         return imageHref;
     }
 
