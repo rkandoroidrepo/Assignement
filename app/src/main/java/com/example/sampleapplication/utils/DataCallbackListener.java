@@ -17,5 +17,5 @@ public interface DataCallbackListener {
      * Called when request failed due to any error
      * @param errorCode
      */
-    void onError(ErrorCode errorCode);
+    void onError(int errorCode);
 }

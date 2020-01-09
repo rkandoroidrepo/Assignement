@@ -12,7 +12,13 @@ public class Row {
     private String description;
     @SerializedName("imageHref")
     @Expose
-    private Object imageHref;
+    private String imageHref;
+
+    public Row(Row other) {
+        this.title = other.title;
+        this.description = other.description;
+        this.imageHref = other.imageHref;
+    }
 
     public String getTitle() {
         return title;
@@ -34,7 +40,7 @@ public class Row {
         return imageHref;
     }
 
-    public void setImageHref(Object imageHref) {
+    public void setImageHref(String imageHref) {
         this.imageHref = imageHref;
     }
 }
