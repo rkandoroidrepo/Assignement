@@ -1,4 +1,4 @@
-package com.example.sampleapplication.utils;
+package com.example.sampleapplication.baseclasses;
 
 /**
  * Created by ramkrishna 09/01/2020
