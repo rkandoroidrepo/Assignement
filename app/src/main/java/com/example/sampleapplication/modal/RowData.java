@@ -18,7 +18,7 @@ public class RowData {
         this.title = other.title;
         List<Row> deepCopy = new ArrayList<>();
         for (Row row : other.rows) {
-            rows.add(new Row(row));
+            deepCopy.add(new Row(row));
         }
         this.rows = deepCopy;
     }
