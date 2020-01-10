@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sampleapplication.R;
-import com.example.sampleapplication.modal.RemoteDataSource;
-import com.example.sampleapplication.modal.RepositoryIml;
+import com.example.sampleapplication.data.RemoteDataSource;
+import com.example.sampleapplication.data.RepositoryIml;
 import com.example.sampleapplication.presenter.ListPresenter;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void loadListFragment(){
-        ListFragment listFragment = ListFragment.newInstance();
+    private void loadListFragment() {
+        FeedsFragment feedsFragment = FeedsFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, listFragment)
+                .add(R.id.fragment_container, feedsFragment)
                 .commit();
-        new ListPresenter(listFragment, RepositoryIml.getInstance(RemoteDataSource.getInstance()));
+        new ListPresenter(feedsFragment, RepositoryIml.getInstance(RemoteDataSource.getInstance()));
 
     }
 }

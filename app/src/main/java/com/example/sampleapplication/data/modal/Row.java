@@ -1,8 +1,11 @@
-package com.example.sampleapplication.modal;
+package com.example.sampleapplication.data.modal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Created by ramkrishna 09/01/2020
+ */
 public class Row {
     @SerializedName("title")
     @Expose
@@ -14,6 +17,7 @@ public class Row {
     @Expose
     private String imageHref;
 
+    //Copy constructor
     public Row(Row other) {
         this.title = other.title;
         this.description = other.description;
@@ -24,23 +28,11 @@ public class Row {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImageHref() {
         return imageHref;
-    }
-
-    public void setImageHref(String imageHref) {
-        this.imageHref = imageHref;
     }
 }

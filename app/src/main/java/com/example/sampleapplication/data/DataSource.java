@@ -1,4 +1,4 @@
-package com.example.sampleapplication.modal;
+package com.example.sampleapplication.data;
 
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.NetworkStatus;
@@ -10,10 +10,11 @@ public interface DataSource {
     /**
      * Gets data from repository
      *
-     * @param networkStatus    network validator
+     * @param networkStatus    network validator if is online true
+     *                         call service else pass NETWORK_ERROR code in calback
      * @param callbackListener listener
      */
-    void getData(NetworkStatus networkStatus, DataCallbackListener callbackListener);
+    void getFeeds(NetworkStatus networkStatus, DataCallbackListener callbackListener);
 
     /**
      * Reset repository

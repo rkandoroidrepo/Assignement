@@ -1,9 +1,9 @@
 package com.example.sampleapplication;
 
-import com.example.sampleapplication.modal.RemoteDataSource;
-import com.example.sampleapplication.modal.Repository;
-import com.example.sampleapplication.modal.RepositoryIml;
-import com.example.sampleapplication.modal.RowData;
+import com.example.sampleapplication.data.RemoteDataSource;
+import com.example.sampleapplication.data.Repository;
+import com.example.sampleapplication.data.RepositoryIml;
+import com.example.sampleapplication.data.modal.RowData;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.ErrorCode;
 import com.example.sampleapplication.utils.NetworkStatus;
@@ -45,8 +45,8 @@ public class RepositoryTest {
     @Test
     public void testGetDataWithSuccess() {
         when(networkStatus.isOnline()).thenReturn(true);
-        repository.getData(false, networkStatus, callbackListener);
-        verify(dataSource).getData(networkStatusArgumentCaptor.capture(),
+        repository.getFeeds(false, networkStatus, callbackListener);
+        verify(dataSource).getFeeds(networkStatusArgumentCaptor.capture(),
                 callbackListenerArgumentCaptor.capture());
         RowData rowData = loadData();
         // data stubbed
@@ -59,8 +59,8 @@ public class RepositoryTest {
     @Test
     public void testGetDataWithNetworkError() {
         when(networkStatus.isOnline()).thenReturn(false);
-        repository.getData(false, networkStatus, callbackListener);
-        verify(dataSource, times(1)).getData(networkStatusArgumentCaptor.capture(),
+        repository.getFeeds(false, networkStatus, callbackListener);
+        verify(dataSource, times(1)).getFeeds(networkStatusArgumentCaptor.capture(),
                 callbackListenerArgumentCaptor.capture());
         callbackListenerArgumentCaptor.getValue().onError(ErrorCode.NETWORK_ERROR);
         verify(callbackListener, times(1)).onError(ErrorCode.NETWORK_ERROR);
@@ -69,8 +69,8 @@ public class RepositoryTest {
     @Test
     public void testGetDataWithServerError() {
         when(networkStatus.isOnline()).thenReturn(true);
-        repository.getData(false, networkStatus, callbackListener);
-        verify(dataSource, times(1)).getData(networkStatusArgumentCaptor.capture(),
+        repository.getFeeds(false, networkStatus, callbackListener);
+        verify(dataSource, times(1)).getFeeds(networkStatusArgumentCaptor.capture(),
                 callbackListenerArgumentCaptor.capture());
         callbackListenerArgumentCaptor.getValue().onError(ErrorCode.SERVER_ERROR);
         verify(callbackListener, times(1)).onError(ErrorCode.SERVER_ERROR);

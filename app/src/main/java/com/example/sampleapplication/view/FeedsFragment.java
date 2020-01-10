@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.sampleapplication.ListContract;
+import com.example.sampleapplication.FeedsContract;
 import com.example.sampleapplication.R;
-import com.example.sampleapplication.modal.Row;
+import com.example.sampleapplication.data.modal.Row;
 import com.example.sampleapplication.utils.AppNetworkStatus;
 import com.example.sampleapplication.utils.ErrorCode;
 
@@ -24,33 +24,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Display as list of feeds
  * A simple {@link Fragment} subclass.
- * Use the {@link ListFragment#newInstance} factory method to
+ * Use the {@link FeedsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment implements ListContract.View,
+public class FeedsFragment extends Fragment implements FeedsContract.View,
         SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener {
 
-    private ListContract.Presenter presenter;
+    private FeedsContract.Presenter presenter;
     private View rootView;
     private ListView contentListView;
-    private ContentListAdapter adapter;
+    private FeedsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout errorLayout;
 
-    public ListFragment() {
+    public FeedsFragment() {
         // Required empty public constructor
     }
 
-    public static ListFragment newInstance() {
-        ListFragment fragment = new ListFragment();
-        return fragment;
+    public static FeedsFragment newInstance() {
+        return new FeedsFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class ListFragment extends Fragment implements ListContract.View,
         rootView = inflater.inflate(R.layout.fragment_list, container, false);
         if (presenter != null) {
             presenter.start();
-            presenter.getData(new AppNetworkStatus(getContext()), true);
+            presenter.getFeeds(new AppNetworkStatus(getContext()), true);
         }
         return rootView;
     }
@@ -74,13 +75,13 @@ public class ListFragment extends Fragment implements ListContract.View,
         retryButton.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         contentListView = rootView.findViewById(R.id.content_list_view);
-        adapter = new ContentListAdapter(getContext(), new ArrayList<>());
+        adapter = new FeedsAdapter(getContext(), new ArrayList<>());
         contentListView.setAdapter(adapter);
     }
 
     @Override
     public void showError(int errorCode) {
-        if(errorCode == ErrorCode.NETWORK_ERROR){
+        if (errorCode == ErrorCode.NETWORK_ERROR) {
             showErrorView(true);
         }
     }
@@ -107,28 +108,30 @@ public class ListFragment extends Fragment implements ListContract.View,
 
     @Override
     public void showErrorView(boolean show) {
-        errorLayout.setVisibility(show?View.VISIBLE:View.GONE);
+        errorLayout.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showContentView(boolean show) {
-        contentListView.setVisibility(show?View.VISIBLE:View.GONE);
+        contentListView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void setPresenter(ListContract.Presenter presenter) {
+    public void setPresenter(FeedsContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public void onRefresh() {
-        presenter.getData(new AppNetworkStatus(getContext()), false);
+        //fromCache false for force update
+        presenter.getFeeds(new AppNetworkStatus(getContext()), false);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.button_retry){
-            presenter.getData(new AppNetworkStatus(getContext()), false);
+        if (view.getId() == R.id.button_retry) {
+            //fromCache false for force update
+            presenter.getFeeds(new AppNetworkStatus(getContext()), false);
         }
     }
 }

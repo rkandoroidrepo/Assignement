@@ -12,16 +12,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sampleapplication.R;
-import com.example.sampleapplication.modal.Row;
+import com.example.sampleapplication.data.modal.Row;
 
 import java.util.List;
 
-public class ContentListAdapter extends BaseAdapter {
+/**
+ * Created by ramkrishna 20/01/2020
+ */
+public class FeedsAdapter extends BaseAdapter {
 
     private Context context;
     private List<Row> rowList;
 
-    public ContentListAdapter(Context context, List<Row> rowList) {
+    public FeedsAdapter(Context context, List<Row> rowList) {
         this.context = context;
         this.rowList = rowList;
     }
@@ -62,11 +65,11 @@ public class ContentListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         Row row = (Row) getItem(i);
-        viewHolder.bind(row);
+        viewHolder.bind(row, context);
         return view;
     }
 
-    private class ViewHolder {
+    private static class ViewHolder {
         private TextView titleTextView;
         private TextView descriptionTextView;
         private ImageView imageView;
@@ -77,7 +80,7 @@ public class ContentListAdapter extends BaseAdapter {
             imageView = view.findViewById(R.id.image_view);
         }
 
-        void bind(Row row) {
+        void bind(Row row, Context context) {
             String title = row.getTitle();
             String description = row.getDescription();
             String imageURL = row.getImageHref();
@@ -92,7 +95,7 @@ public class ContentListAdapter extends BaseAdapter {
                         .load(imageURL)
                         .centerCrop()
                         .placeholder(R.drawable.image_place_holder)
-                        .apply(new RequestOptions().override(500, 500))
+                        .apply(new RequestOptions().override(600, 500))
                         .error(R.drawable.image_error)
                         .into(imageView);
             }

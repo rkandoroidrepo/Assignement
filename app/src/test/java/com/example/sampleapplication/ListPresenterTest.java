@@ -1,7 +1,7 @@
 package com.example.sampleapplication;
 
-import com.example.sampleapplication.modal.Repository;
-import com.example.sampleapplication.modal.RowData;
+import com.example.sampleapplication.data.Repository;
+import com.example.sampleapplication.data.modal.RowData;
 import com.example.sampleapplication.presenter.ListPresenter;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.ErrorCode;
@@ -23,11 +23,11 @@ public class ListPresenterTest {
 
     @Mock
     private NetworkStatus networkStatus;
-    private ListContract.Presenter presenter;
+    private FeedsContract.Presenter presenter;
     @Mock
     private Repository repository;
     @Mock
-    private ListContract.View view;
+    private FeedsContract.View view;
     @Captor
     private ArgumentCaptor<NetworkStatus> networkStatusArgumentCaptor;
     @Captor
@@ -49,8 +49,8 @@ public class ListPresenterTest {
     @Test
     public void testGetDataDisplayFeeds() {
         Mockito.when(networkStatus.isOnline()).thenReturn(true);
-        presenter.getData(networkStatus, true);
-        Mockito.verify(repository).getData(anyBoolean(), networkStatusArgumentCaptor.capture(),
+        presenter.getFeeds(networkStatus, true);
+        Mockito.verify(repository).getFeeds(anyBoolean(), networkStatusArgumentCaptor.capture(),
                 listenerArgumentCaptor.capture());
         RowData rowData = loadData();
         listenerArgumentCaptor.getValue().onSuccess(rowData);
@@ -66,8 +66,8 @@ public class ListPresenterTest {
     @Test
     public void testGetDataNetworkError() {
         Mockito.when(networkStatus.isOnline()).thenReturn(true);
-        presenter.getData(networkStatus, true);
-        Mockito.verify(repository).getData(anyBoolean(), networkStatusArgumentCaptor.capture(),
+        presenter.getFeeds(networkStatus, true);
+        Mockito.verify(repository).getFeeds(anyBoolean(), networkStatusArgumentCaptor.capture(),
                 listenerArgumentCaptor.capture());
         listenerArgumentCaptor.getValue().onError(ErrorCode.NETWORK_ERROR);
         InOrder inOrder = Mockito.inOrder(view);

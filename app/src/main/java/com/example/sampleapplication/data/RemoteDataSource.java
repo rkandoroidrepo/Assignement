@@ -1,8 +1,10 @@
-package com.example.sampleapplication.modal;
+package com.example.sampleapplication.data;
 
+import com.example.sampleapplication.data.modal.RowData;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.ErrorCode;
 import com.example.sampleapplication.utils.NetworkStatus;
+import com.example.sampleapplication.utils.RetrofitClient;
 
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import retrofit2.Response;
 
 /**
  * Created by ramkrishna 09/01/2020
+ * Implementation of the data source that call network api using retrofit
  */
 public class RemoteDataSource implements DataSource {
     private static RemoteDataSource remoteDataSource;
@@ -37,7 +40,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getData(NetworkStatus networkStatus, final DataCallbackListener callbackListener) {
+    public void getFeeds(NetworkStatus networkStatus, final DataCallbackListener callbackListener) {
         if (networkStatus.isOnline()) {
             apiService.getRows().enqueue(new Callback<RowData>() {
                 @Override

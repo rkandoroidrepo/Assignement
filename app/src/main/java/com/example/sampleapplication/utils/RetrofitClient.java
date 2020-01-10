@@ -1,12 +1,12 @@
-package com.example.sampleapplication.modal;
+package com.example.sampleapplication.utils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class RetrofitClient {
+public class RetrofitClient {
     private static String BASE_URL = "https://dl.dropboxusercontent.com/";
 
-    static Retrofit getClient() {
+    public static Retrofit getClient() {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
                 .build();

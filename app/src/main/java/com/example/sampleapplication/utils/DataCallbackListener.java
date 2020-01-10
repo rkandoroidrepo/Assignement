@@ -1,6 +1,6 @@
 package com.example.sampleapplication.utils;
 
-import com.example.sampleapplication.modal.RowData;
+import com.example.sampleapplication.data.modal.RowData;
 
 /**
  * Created by ramkrishna 09/01/2020
