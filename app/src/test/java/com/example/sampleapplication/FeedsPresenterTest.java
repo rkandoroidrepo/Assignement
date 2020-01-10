@@ -2,11 +2,10 @@ package com.example.sampleapplication;
 
 import com.example.sampleapplication.data.Repository;
 import com.example.sampleapplication.data.modal.RowData;
-import com.example.sampleapplication.presenter.ListPresenter;
+import com.example.sampleapplication.presenter.FeedsPresenter;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.ErrorCode;
 import com.example.sampleapplication.utils.NetworkStatus;
-import com.google.gson.Gson;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 
-public class ListPresenterTest {
+public class FeedsPresenterTest {
 
     @Mock
     private NetworkStatus networkStatus;
@@ -36,7 +35,7 @@ public class ListPresenterTest {
     @Before
     public void presenterSetup() {
         MockitoAnnotations.initMocks(this);
-        presenter = new ListPresenter(view, repository);
+        presenter = new FeedsPresenter(view, repository);
         view.setPresenter(presenter);
     }
 

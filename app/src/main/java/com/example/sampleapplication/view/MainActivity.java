@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sampleapplication.R;
 import com.example.sampleapplication.data.RemoteDataSource;
 import com.example.sampleapplication.data.RepositoryIml;
-import com.example.sampleapplication.presenter.ListPresenter;
+import com.example.sampleapplication.presenter.FeedsPresenter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.fragment_container, feedsFragment)
                 .commit();
-        new ListPresenter(feedsFragment, RepositoryIml.getInstance(RemoteDataSource.getInstance()));
+        new FeedsPresenter(feedsFragment, RepositoryIml.getInstance(RemoteDataSource.getInstance()));
 
     }
 }

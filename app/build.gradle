@@ -21,6 +21,12 @@ android {
         targetCompatibility = "8"
         sourceCompatibility = "8"
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -42,4 +48,9 @@ dependencies {
     //Testing frameworks
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.23.4'
+    //Robolectric environment
+    testImplementation 'androidx.test:core:1.2.0'
+    testImplementation 'org.robolectric:robolectric:4.3'
+
+
 }

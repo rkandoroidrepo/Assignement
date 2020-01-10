@@ -9,11 +9,11 @@ import com.example.sampleapplication.utils.NetworkStatus;
 /**
  * Created by ramkrishna 20/01/2020
  */
-public class ListPresenter implements FeedsContract.Presenter {
+public class FeedsPresenter implements FeedsContract.Presenter {
     private FeedsContract.View view;
     private Repository repository;
 
-    public ListPresenter(FeedsContract.View view, Repository repository) {
+    public FeedsPresenter(FeedsContract.View view, Repository repository) {
         this.view = view;
         this.repository = repository;
         this.view.setPresenter(this);
