@@ -13,19 +13,20 @@ public class ListPresenter implements ListContract.Presenter {
     public ListPresenter(ListContract.View view, Repository repository) {
         this.view = view;
         this.repository = repository;
+        this.view.setPresenter(this);
     }
 
     @Override
-    public void getData(NetworkStatus networkStatus, boolean fromCache){
+    public void getData(NetworkStatus networkStatus, boolean fromCache) {
         view.showIndicator(true);
         repository.getData(fromCache, networkStatus, new DataCallbackListener() {
             @Override
             public void onSuccess(RowData rowData) {
                 view.showIndicator(false);
-                if(rowData.getTitle()!=null) {
+                if (rowData.getTitle() != null) {
                     view.updateActionBarTitle(rowData.getTitle());
                 }
-                if(!rowData.getRows().isEmpty()) {
+                if (!rowData.getRows().isEmpty()) {
                     view.showFeeds(rowData.getRows());
                 }
             }

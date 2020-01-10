@@ -26,7 +26,7 @@ public class ContentListAdapter extends BaseAdapter {
         this.rowList = rowList;
     }
 
-    public void updateListView(List<Row> rowList){
+    public void updateListView(List<Row> rowList) {
         this.rowList = rowList;
         notifyDataSetChanged();
     }
@@ -38,9 +38,9 @@ public class ContentListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        if(rowList!=null) {
+        if (rowList != null) {
             return rowList.get(i);
-        }else {
+        } else {
             return 0;
         }
     }

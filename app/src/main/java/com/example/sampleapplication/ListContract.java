@@ -29,18 +29,21 @@ public interface ListContract {
 
         /**
          * Show/hide progress bar
+         *
          * @param show flag
          */
         void showIndicator(boolean show);
 
         /**
          * Update action bar title
+         *
          * @param text title from json feed
          */
         void updateActionBarTitle(String text);
 
         /**
          * Show json feeds in listView
+         *
          * @param rows data
          */
         void showFeeds(List<Row> rows);

@@ -14,12 +14,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sampleapplication.ListContract;
 import com.example.sampleapplication.R;
-import com.example.sampleapplication.modal.RemoteDataSource;
-import com.example.sampleapplication.modal.RepositoryIml;
 import com.example.sampleapplication.modal.Row;
-import com.example.sampleapplication.presenter.ListPresenter;
 import com.example.sampleapplication.utils.AppNetworkStatus;
 import com.example.sampleapplication.utils.ErrorCode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +33,7 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
     private ListView contentListView;
     private ContentListAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+
     public ListFragment() {
         // Required empty public constructor
     }
@@ -55,9 +54,10 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
         // Inflate the layout for this fragment
         setRetainInstance(true);
         rootView = inflater.inflate(R.layout.fragment_list, container, false);
-        presenter = new ListPresenter(this, RepositoryIml.getInstance(RemoteDataSource.getInstance()));
-        presenter.start();
-        presenter.getData(new AppNetworkStatus(getContext()), true);
+        if (presenter != null) {
+            presenter.start();
+            presenter.getData(new AppNetworkStatus(getContext()), true);
+        }
         return rootView;
     }
 
@@ -82,22 +82,22 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
 
     @Override
     public void updateActionBarTitle(String text) {
-        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        if (actionBar!=null){
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
             actionBar.setTitle(text);
         }
     }
 
     @Override
     public void showFeeds(List<Row> rows) {
-        if(adapter!=null){
+        if (adapter != null) {
             adapter.updateListView(rows);
         }
     }
 
     @Override
     public void setPresenter(ListContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override
