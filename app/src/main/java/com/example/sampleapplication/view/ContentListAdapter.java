@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sampleapplication.R;
 import com.example.sampleapplication.modal.Row;
 
@@ -25,6 +26,11 @@ public class ContentListAdapter extends BaseAdapter {
         this.rowList = rowList;
     }
 
+    public void updateListView(List<Row> rowList){
+        this.rowList = rowList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return rowList.size();
@@ -32,7 +38,11 @@ public class ContentListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return rowList.get(i);
+        if(rowList!=null) {
+            return rowList.get(i);
+        }else {
+            return 0;
+        }
     }
 
     @Override
@@ -82,6 +92,7 @@ public class ContentListAdapter extends BaseAdapter {
                         .load(imageURL)
                         .centerCrop()
                         .placeholder(R.drawable.image_place_holder)
+                        .apply(new RequestOptions().override(500, 500))
                         .error(R.drawable.image_error)
                         .into(imageView);
             }
