@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 public class ListPresenterTest {
 
     @Mock
-    NetworkStatus networkStatus;
+    private NetworkStatus networkStatus;
     private ListContract.Presenter presenter;
     @Mock
     private Repository repository;
