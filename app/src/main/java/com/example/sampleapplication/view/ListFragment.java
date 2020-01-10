@@ -10,6 +10,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sampleapplication.ListContract;
 import com.example.sampleapplication.R;
@@ -27,12 +28,13 @@ import java.util.List;
  * Use the {@link ListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment implements ListContract.View {
+public class ListFragment extends Fragment implements ListContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private ListContract.Presenter presenter;
     private View rootView;
     private ListView contentListView;
     private ContentListAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public ListFragment() {
         // Required empty public constructor
     }
@@ -61,8 +63,10 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     @Override
     public void initUI() {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
         contentListView = rootView.findViewById(R.id.content_list_view);
-        adapter = new ContentListAdapter(getContext(), new ArrayList<Row>());
+        adapter = new ContentListAdapter(getContext(), new ArrayList<>());
         contentListView.setAdapter(adapter);
     }
 
@@ -73,7 +77,7 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     @Override
     public void showIndicator(boolean show) {
-
+        swipeRefreshLayout.setRefreshing(show);
     }
 
     @Override
@@ -96,4 +100,8 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     }
 
+    @Override
+    public void onRefresh() {
+        presenter.getData(new AppNetworkStatus(getContext()), false);
+    }
 }
