@@ -17,13 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="@dimen/row_layout_weight">
 
         <TextView
             android:id="@+id/txt_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_weight="@dimen/description_text_weight"
             android:textSize="@dimen/text_size_description_text"
             android:textColor="@android:color/black" />
 
@@ -31,7 +31,9 @@
             android:id="@+id/image_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="@dimen/image_view_weight"
+            android:layout_gravity="right"
+            android:src="@drawable/image_error"
             android:scaleType="fitCenter"/>
     </LinearLayout>
 </LinearLayout>

@@ -33,6 +33,7 @@ public class RepositoryIml implements Repository {
             if (fromCache && rowData != null && !rowData.getRows().isEmpty()) {
                 //Pass cached data
                 //Deep copy passed to avoid any data manipulation
+                isFeedsLoading = false;
                 callbackListener.onSuccess(new RowData(rowData));
             } else {
                 isFeedsLoading = true;

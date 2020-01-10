@@ -23,8 +23,10 @@ public class FeedsAdapter extends BaseAdapter {
 
     private Context context;
     private List<Row> rowList;
+    private static final int IMAGE_WIDTH = 600;
+    private static final int IMAGE_HEIGHT = 500;
 
-    public FeedsAdapter(Context context, List<Row> rowList) {
+    FeedsAdapter(Context context, List<Row> rowList) {
         this.context = context;
         this.rowList = rowList;
     }
@@ -57,7 +59,7 @@ public class FeedsAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_item_view_layout, viewGroup,
+            view = LayoutInflater.from(context).inflate(R.layout.feeds_itemview_layout, viewGroup,
                     false);
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
@@ -95,7 +97,7 @@ public class FeedsAdapter extends BaseAdapter {
                         .load(imageURL)
                         .centerCrop()
                         .placeholder(R.drawable.image_place_holder)
-                        .apply(new RequestOptions().override(600, 500))
+                        .apply(new RequestOptions().override(IMAGE_WIDTH, IMAGE_HEIGHT))
                         .error(R.drawable.image_error)
                         .into(imageView);
             }

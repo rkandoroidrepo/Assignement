@@ -3,5 +3,5 @@
     <string name="retry">Retry</string>
     <string name="check_internet">Please check your internet connectivity and try again</string>
     <string name="no_connection">No Connection</string>
-
+    <string name="server_error">Problem connecting to server, please try later</string>
 </resources>

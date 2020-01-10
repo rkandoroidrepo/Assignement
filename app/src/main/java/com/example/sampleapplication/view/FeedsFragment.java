@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,7 +75,7 @@ public class FeedsFragment extends Fragment implements FeedsContract.View,
         Button retryButton = rootView.findViewById(R.id.button_retry);
         retryButton.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
-        contentListView = rootView.findViewById(R.id.content_list_view);
+        contentListView = rootView.findViewById(R.id.feeds_list_view);
         adapter = new FeedsAdapter(getContext(), new ArrayList<>());
         contentListView.setAdapter(adapter);
     }
@@ -83,6 +84,11 @@ public class FeedsFragment extends Fragment implements FeedsContract.View,
     public void showError(int errorCode) {
         if (errorCode == ErrorCode.NETWORK_ERROR) {
             showErrorView(true);
+        }else {
+            // Show generic error message
+            Toast.makeText(getContext(),
+                    getResources().getString(R.string.server_error),
+                    Toast.LENGTH_LONG).show();
         }
     }
 

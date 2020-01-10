@@ -88,7 +88,7 @@ public class FeedsFragmentTest {
     public void testShowFeeds() {
         // Setup
         final List<Row> rows = Utils.loadFeeds().getRows();
-        ListView listView = view.findViewById(R.id.content_list_view);
+        ListView listView = view.findViewById(R.id.feeds_list_view);
         View errorView = view.findViewById(R.id.error_layout);
         FeedsAdapter adapter = (FeedsAdapter) listView.getAdapter();
 
@@ -124,7 +124,7 @@ public class FeedsFragmentTest {
         feedsFragmentUnderTest.showContentView(show);
 
         // Verify the results
-        ListView listView = view.findViewById(R.id.content_list_view);
+        ListView listView = view.findViewById(R.id.feeds_list_view);
         assertEquals("Feeds should be hidden", View.GONE, listView.getVisibility());
 
     }
