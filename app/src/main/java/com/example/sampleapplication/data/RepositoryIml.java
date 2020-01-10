@@ -12,6 +12,7 @@ public class RepositoryIml implements Repository {
     private static Repository repository;
     private RowData rowData;
     private DataSource dataSource;
+    private boolean isFeedsLoading;
 
     private RepositoryIml(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -27,26 +28,34 @@ public class RepositoryIml implements Repository {
     @Override
     public void getFeeds(boolean fromCache, NetworkStatus networkStatus,
                          final DataCallbackListener callbackListener) {
-        if (fromCache && rowData != null && !rowData.getRows().isEmpty()) {
-            //Pass cached data
-            //Deep copy passed to avoid any data manipulation
-            callbackListener.onSuccess(new RowData(rowData));
-        } else {
-            //request from remote
-            dataSource.getFeeds(networkStatus, new DataCallbackListener() {
-                @Override
-                public void onSuccess(RowData rows) {
-                    //Store data in repo
-                    rowData = rows;
-                    //Deep copy passed
-                    callbackListener.onSuccess(new RowData(rowData));
-                }
+        //Avoid multiple api calls (If its already in progress)
+        if(!isFeedsLoading){
+            if (fromCache && rowData != null && !rowData.getRows().isEmpty()) {
+                //Pass cached data
+                //Deep copy passed to avoid any data manipulation
+                callbackListener.onSuccess(new RowData(rowData));
+            } else {
+                isFeedsLoading = true;
+                //request from remote
+                dataSource.getFeeds(networkStatus, new DataCallbackListener() {
+                    @Override
+                    public void onSuccess(RowData rows) {
+                        isFeedsLoading = false;
+                        //Store data in repo
+                        rowData = rows;
+                        //Deep copy passed
+                        callbackListener.onSuccess(new RowData(rowData));
+                    }
 
-                @Override
-                public void onError(int errorCode) {
-                    callbackListener.onError(errorCode);
-                }
-            });
+                    @Override
+                    public void onError(int errorCode) {
+                        //Clear cached data
+                        rowData = null;
+                        isFeedsLoading = false;
+                        callbackListener.onError(errorCode);
+                    }
+                });
+            }
         }
     }
 
