@@ -51,6 +51,4 @@ dependencies {
     //Robolectric environment
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'org.robolectric:robolectric:4.3'
-
-
 }
