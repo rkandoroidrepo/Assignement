@@ -18,11 +18,17 @@ public class ListPresenter implements ListContract.Presenter {
 
     @Override
     public void getData(NetworkStatus networkStatus, boolean fromCache) {
+        //Show loading indicator
         view.showIndicator(true);
+        //Hide error layout
+        view.showErrorView(false);
         repository.getData(fromCache, networkStatus, new DataCallbackListener() {
             @Override
             public void onSuccess(RowData rowData) {
+                //Hide loading indicator
                 view.showIndicator(false);
+                //Show content list
+                view.showContentView(true);
                 if (rowData.getTitle() != null) {
                     view.updateActionBarTitle(rowData.getTitle());
                 }
@@ -33,7 +39,11 @@ public class ListPresenter implements ListContract.Presenter {
 
             @Override
             public void onError(int errorCode) {
+                //Hide loading indicator
                 view.showIndicator(false);
+                //Hide content list
+                view.showContentView(false);
+                view.showError(errorCode);
             }
         });
     }

@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +28,16 @@ import java.util.List;
  * Use the {@link ListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment implements ListContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class ListFragment extends Fragment implements ListContract.View,
+        SwipeRefreshLayout.OnRefreshListener,
+        View.OnClickListener {
 
     private ListContract.Presenter presenter;
     private View rootView;
     private ListView contentListView;
     private ContentListAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RelativeLayout errorLayout;
 
     public ListFragment() {
         // Required empty public constructor
@@ -64,6 +69,9 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
     @Override
     public void initUI() {
         swipeRefreshLayout = rootView.findViewById(R.id.swipe_layout);
+        errorLayout = rootView.findViewById(R.id.error_layout);
+        Button retryButton = rootView.findViewById(R.id.button_retry);
+        retryButton.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         contentListView = rootView.findViewById(R.id.content_list_view);
         adapter = new ContentListAdapter(getContext(), new ArrayList<>());
@@ -71,8 +79,10 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
     }
 
     @Override
-    public void showError(ErrorCode errorCode) {
-
+    public void showError(int errorCode) {
+        if(errorCode == ErrorCode.NETWORK_ERROR){
+            showErrorView(true);
+        }
     }
 
     @Override
@@ -96,6 +106,16 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
     }
 
     @Override
+    public void showErrorView(boolean show) {
+        errorLayout.setVisibility(show?View.VISIBLE:View.GONE);
+    }
+
+    @Override
+    public void showContentView(boolean show) {
+        contentListView.setVisibility(show?View.VISIBLE:View.GONE);
+    }
+
+    @Override
     public void setPresenter(ListContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -103,5 +123,12 @@ public class ListFragment extends Fragment implements ListContract.View, SwipeRe
     @Override
     public void onRefresh() {
         presenter.getData(new AppNetworkStatus(getContext()), false);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.button_retry){
+            presenter.getData(new AppNetworkStatus(getContext()), false);
+        }
     }
 }

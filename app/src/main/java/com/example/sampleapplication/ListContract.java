@@ -3,7 +3,6 @@ package com.example.sampleapplication;
 import com.example.sampleapplication.baseclasses.BasePresenter;
 import com.example.sampleapplication.baseclasses.BaseView;
 import com.example.sampleapplication.modal.Row;
-import com.example.sampleapplication.utils.ErrorCode;
 import com.example.sampleapplication.utils.NetworkStatus;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public interface ListContract {
          *
          * @param errorCode error code defined in ErrorCode class
          */
-        void showError(ErrorCode errorCode);
+        void showError(int errorCode);
 
         /**
          * Show/hide progress bar
@@ -47,6 +46,10 @@ public interface ListContract {
          * @param rows data
          */
         void showFeeds(List<Row> rows);
+
+        void showErrorView(boolean show);
+
+        void showContentView(boolean show);
     }
 
     interface Presenter extends BasePresenter {

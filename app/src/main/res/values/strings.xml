@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SampleApplication</string>
+    <string name="retry">Retry</string>
+    <string name="check_internet">Please check your internet connectivity and try again</string>
+    <string name="no_connection">No Connection</string>
+
 </resources>
