@@ -16,9 +16,9 @@
 ## Notes
 * MVP Architecture has been followed.
 
-* Repository pattern followed for modal layer.
+* A repository pattern followed for the modal layer.
 
-* Unit test cases written for all the three layers.
+* Unit test cases written for all three layers.
 
 * Pull to refresh feature implemented.
 
