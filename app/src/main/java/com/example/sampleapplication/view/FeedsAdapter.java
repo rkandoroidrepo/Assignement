@@ -21,10 +21,10 @@ import java.util.List;
  */
 public class FeedsAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Row> rowList;
     private static final int IMAGE_WIDTH = 600;
     private static final int IMAGE_HEIGHT = 500;
+    private Context context;
+    private List<Row> rowList;
 
     FeedsAdapter(Context context, List<Row> rowList) {
         this.context = context;

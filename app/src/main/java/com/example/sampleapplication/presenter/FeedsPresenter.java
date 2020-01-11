@@ -1,8 +1,8 @@
 package com.example.sampleapplication.presenter;
 
-import com.example.sampleapplication.FeedsContract;
 import com.example.sampleapplication.data.Repository;
 import com.example.sampleapplication.data.modal.RowData;
+import com.example.sampleapplication.interfaces.FeedsContract;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.NetworkStatus;
 

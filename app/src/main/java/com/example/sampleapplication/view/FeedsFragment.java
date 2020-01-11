@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.sampleapplication.FeedsContract;
 import com.example.sampleapplication.R;
 import com.example.sampleapplication.data.modal.Row;
+import com.example.sampleapplication.interfaces.FeedsContract;
 import com.example.sampleapplication.utils.AppNetworkStatus;
 import com.example.sampleapplication.utils.ErrorCode;
 
@@ -84,7 +84,7 @@ public class FeedsFragment extends Fragment implements FeedsContract.View,
     public void showError(int errorCode) {
         if (errorCode == ErrorCode.NETWORK_ERROR) {
             showErrorView(true);
-        }else {
+        } else {
             // Show generic error message
             Toast.makeText(getContext(),
                     getResources().getString(R.string.server_error),

@@ -1,7 +1,5 @@
-package com.example.sampleapplication;
+package com.example.sampleapplication.interfaces;
 
-import com.example.sampleapplication.baseclasses.BasePresenter;
-import com.example.sampleapplication.baseclasses.BaseView;
 import com.example.sampleapplication.data.modal.Row;
 import com.example.sampleapplication.utils.NetworkStatus;
 

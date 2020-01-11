@@ -29,7 +29,7 @@ public class RepositoryIml implements Repository {
     public void getFeeds(boolean fromCache, NetworkStatus networkStatus,
                          final DataCallbackListener callbackListener) {
         //Avoid multiple api calls (If its already in progress)
-        if(!isFeedsLoading){
+        if (!isFeedsLoading) {
             if (fromCache && rowData != null && !rowData.getRows().isEmpty()) {
                 //Pass cached data
                 //Deep copy passed to avoid any data manipulation

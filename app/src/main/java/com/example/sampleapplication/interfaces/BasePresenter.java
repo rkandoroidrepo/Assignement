@@ -1,4 +1,4 @@
-package com.example.sampleapplication.baseclasses;
+package com.example.sampleapplication.interfaces;
 
 /**
  * Created by ramkrishna 09/01/2020

@@ -2,6 +2,7 @@ package com.example.sampleapplication;
 
 import com.example.sampleapplication.data.Repository;
 import com.example.sampleapplication.data.modal.RowData;
+import com.example.sampleapplication.interfaces.FeedsContract;
 import com.example.sampleapplication.presenter.FeedsPresenter;
 import com.example.sampleapplication.utils.DataCallbackListener;
 import com.example.sampleapplication.utils.ErrorCode;
