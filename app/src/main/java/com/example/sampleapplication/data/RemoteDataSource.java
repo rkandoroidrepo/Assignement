@@ -65,6 +65,6 @@ public class RemoteDataSource implements DataSource {
     @Override
     public void reset() {
         apiService = null;
-        remoteDataSource.reset();
+        remoteDataSource = null;
     }
 }
