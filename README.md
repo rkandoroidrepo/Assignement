@@ -1,17 +1,26 @@
-# Assignement
-Following 3rd party library has been used in this assignment.
-Retrofit 
-Gson
-Glide
+# Assignment Overview
+## 3rd party libraries
+* Retrofit
 
-Follwing testing framework used.
-JUnit
-Mockito
-Robolectric 
+* Gson
 
-MVP Architecture has been followed.
-Repository pattern followed for modal layer. 
-Unit test cases written for all the three layers.
+* Glide
+ 
+## Testing frameworks
+* JUnit
 
-Pull to refresh feature implemented
-Network and server error handled 
+* Mockito
+
+* Robolectric
+ 
+## Notes
+* MVP Architecture has been followed.
+
+* Repository pattern followed for modal layer.
+
+* Unit test cases written for all the three layers.
+
+* Pull to refresh feature implemented.
+
+* Network and server error handled.
+
